@@ -1,0 +1,41 @@
+# DBT BigQuery credentials - NEVER commit these files
+keyfile.json
+profiles.yml
+service-account-key.json
+*-key.json
+credentials.json
+
+# DBT build artifacts
+target/
+dbt_packages/
+.dbt/
+
+# Logs and temporary files
+logs/
+*.log
+.env
+.env.local
+
+# IDE and system files
+.DS_Store
+.vscode/settings.json
+*.pyc
+__pycache__/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

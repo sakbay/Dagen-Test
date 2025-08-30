@@ -1,0 +1,25 @@
+version: 2
+sources:
+- name: sami_test_raw
+  description: Raw Airbyte data from payment system
+  database: prd-dagen
+  schema: sami_test
+  tables:
+  - name: airbyte_raw_customers
+    description: Raw customer data from payment system
+  - name: airbyte_raw_transactions
+    description: Raw transaction data
+  - name: airbyte_raw_payment_methods
+    description: Raw payment method data
+  - name: airbyte_raw_fees
+    description: Raw fee data
+  - name: airbyte_raw_refunds
+    description: Raw refund data
+  - name: airbyte_raw_disputes
+    description: Raw dispute data
+  - name: airbyte_raw_mandates
+    description: Raw mandate data
+  - name: airbyte_raw_payouts
+    description: Raw payout data
+  - name: airbyte_raw_transaction_legs
+    description: Raw transaction leg data

@@ -1,0 +1,12 @@
+Dagen-Test:
+  outputs:
+    dev:
+      dataset: payments_v1
+      keyfile: keyfile.json
+      method: service-account
+      priority: interactive
+      project: prd-dagen
+      threads: 4
+      timeout_seconds: 300
+      type: bigquery
+  target: dev

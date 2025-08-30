@@ -1,0 +1,113 @@
+version: 2
+
+models:
+  # Staging Models
+  - name: stg_customers
+    description: "Staging table for customer data extracted from Airbyte raw JSON"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Customer email address"
+        tests:
+          - not_null
+      - name: kyc_status
+        description: "KYC verification status"
+        tests:
+          - accepted_values:
+              values: ['verified', 'pending', 'rejected']
+
+  - name: stg_transactions
+    description: "Staging table for transaction data extracted from Airbyte raw JSON"
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier"
+        tests:
+          - unique
+          - not_null
+      - name: amount
+        description: "Transaction amount"
+        tests:
+          - not_null
+      - name: currency
+        description: "Transaction currency"
+        tests:
+          - not_null
+
+  - name: stg_payment_methods
+    description: "Staging table for payment method data"
+    columns:
+      - name: payment_method_id
+        description: "Unique payment method identifier"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_fees
+    description: "Staging table for fee data"
+    columns:
+      - name: fee_id
+        description: "Unique fee identifier"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_refunds
+    description: "Staging table for refund data"
+
+  # Dimension Models
+  - name: dim_customers
+    description: "Customer dimension table with enhanced attributes"
+    columns:
+      - name: customer_id
+        description: "Primary key - unique customer identifier"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_payment_methods
+    description: "Payment method dimension table"
+    columns:
+      - name: payment_method_id
+        description: "Primary key - unique payment method identifier"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Date dimension table with calendar attributes"
+    columns:
+      - name: date_day
+        description: "Primary key - date"
+        tests:
+          - unique
+          - not_null
+
+  # Fact Models
+  - name: fact_transactions
+    description: "Transaction fact table with measures and foreign keys"
+    columns:
+      - name: transaction_id
+        description: "Primary key - unique transaction identifier"
+        tests:
+          - unique
+          - not_null
+      - name: gross_amount
+        description: "Original transaction amount before fees"
+        tests:
+          - not_null
+      - name: net_amount
+        description: "Transaction amount after fees"
+
+  # Mart Models
+  - name: mart_payment_analytics
+    description: "Star schema mart combining all dimensions with transaction facts for analytics"
+    columns:
+      - name: transaction_id
+        description: "Primary key - unique transaction identifier"
+        tests:
+          - unique
+          - not_null
